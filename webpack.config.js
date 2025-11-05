@@ -1,6 +1,5 @@
 import path from 'path';
 import { fileURLToPath } from 'url';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -32,15 +31,6 @@ export default (env, argv) => {
       ],
     },
     plugins: [
-      new HtmlWebpackPlugin({
-        template: './src/index.html',
-        filename: 'index.html',
-        minify: isProduction ? {
-          removeComments: true,
-          collapseWhitespace: true,
-          removeRedundantAttributes: true,
-        } : false,
-      }),
       ...(isProduction ? [
         new MiniCssExtractPlugin({
           filename: 'styles.[contenthash].css',

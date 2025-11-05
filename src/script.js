@@ -34,7 +34,7 @@ if (isInChatGPT) {
     console.log('Hello World App запущено в ChatGPT!');
     
     if (window.openai.toolOutput) {
-        console.log('Получены данные от сервера:', window.openai.toolOutput);
+        console.log('Received data from the server:', window.openai.toolOutput);
     }
     
     if (window.openai.widgetState && typeof window.openai.widgetState.currentIndex === 'number') {
@@ -43,17 +43,17 @@ if (isInChatGPT) {
     }
     
     const sendMessageBtn = document.createElement('button');
-    sendMessageBtn.textContent = 'Отправить сообщение в чат';
+    sendMessageBtn.textContent = 'Send message to chat';
     sendMessageBtn.className = 'btn';
     sendMessageBtn.style.marginTop = '10px';
     sendMessageBtn.addEventListener('click', async () => {
         await window.openai.sendFollowupMessage({
-            prompt: `Текущее приветствие: ${greetings[currentIndex]}`
+            prompt: `Current greeting: ${greetings[currentIndex]}`
         });
     });
     
     const card = document.querySelector('.card');
     card.appendChild(sendMessageBtn);
 } else {
-    console.log('Hello World App загружено локально');
+    console.log('Hello World App loaded locally');
 }
