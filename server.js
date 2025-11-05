@@ -22,7 +22,7 @@ const resourceUri = "ui://widget/hello-world.html";
 const resource = {
   uri: resourceUri,
   name: "Hello World Widget",
-  description: "HTML шаблон для Hello World MCP приложения",
+  description: "HTML template for Hello World MCP application",
   mimeType: "text/html+skybridge",
   _meta: {
     "openai/outputTemplate": resourceUri,
@@ -33,13 +33,13 @@ const resource = {
 
 const tool = {
   name: "show_hello_world",
-  description: "Показать интерактивный Hello World интерфейс",
+  description: "Show interactive Hello World interface",
   title: "Show Hello World",
   inputSchema: { type: "object", properties: {} },
   _meta: {
     "openai/outputTemplate": resourceUri,
-    "openai/toolInvocation/invoking": "Загружаю Hello World...",
-    "openai/toolInvocation/invoked": "Приложение загружено!",
+    "openai/toolInvocation/invoking": "Loading Hello World...",
+    "openai/toolInvocation/invoked": "Application loaded!",
   },
 };
 
@@ -66,8 +66,8 @@ function getHTMLContent() {
     <div id="hello-world-root" class="container">
       <div class="card">
         <h1 id="greeting">Hello World!</h1>
-        <p class="subtitle">Интерактивный MCP виджет на Express</p>
-        <button id="changeTextBtn" class="btn">Изменить язык</button>
+        <p class="subtitle">Interactive MCP widget on Express</p>
+        <button id="changeTextBtn" class="btn">Change language</button>
       </div>
     </div>
     ${CSS_CONTENT ? `<style>${CSS_CONTENT}</style>` : ""}
@@ -97,7 +97,7 @@ function createHelloServer() {
   server.setRequestHandler(CallToolRequestSchema, async () => ({
     content: [{
       type: "text",
-      text: "Hello World приложение загружено! Нажмите кнопку, чтобы изменить язык.",
+      text: "Hello World application loaded! Click the button to change the language.",
     }],
     structuredContent: { message: "Hello World!", timestamp: new Date().toISOString() },
     _meta: tool._meta,

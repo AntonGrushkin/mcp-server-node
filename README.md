@@ -47,6 +47,10 @@ npm run serve
 
 Server will be available at: `http://localhost:3000`
 
+## Connecting to ChatGPT
+
+**Note:** ChatGPT requires HTTPS for MCP connections, so `http://localhost:3000` will not work directly. To connect your local MCP server to ChatGPT, you can use **ngrok** to create an HTTPS tunnel to your local server.
+
 ## API Endpoints
 
 - `GET /mcp` - SSE endpoint for connecting MCP clients
