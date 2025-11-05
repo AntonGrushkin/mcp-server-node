@@ -1,76 +1,76 @@
 # Hello World MCP Server
 
-## Описание
+## Description
 
-Этот проект представляет собой MCP (Model Context Protocol) сервер, который предоставляет интерактивный Hello World виджет. Приложение может быть запущено как автономный сервер или интегрировано с ChatGPT через MCP протокол.
+This project is an MCP (Model Context Protocol) server that provides an interactive Hello World widget. The application can be run as a standalone server or integrated with ChatGPT through the MCP protocol.
 
-### Основные возможности
+### Key Features
 
-- 🚀 MCP сервер на Express с поддержкой SSE (Server-Sent Events)
-- 🎨 Веб-интерфейс
-- 📦 Сборка фронтенда через Webpack
-- 🔌 Интеграция с OpenAI/ChatGPT через MCP протокол
+- 🚀 MCP server on Express with SSE (Server-Sent Events) support
+- 🎨 Web interface
+- 📦 Frontend build via Webpack
+- 🔌 Integration with OpenAI/ChatGPT through MCP protocol
 
-## Структура проекта
+## Project Structure
 
 ```
 mcp-server-node/
-├── dist/             # Собранные файлы (генерируются при сборке)
-├── src/              # Исходные файлы
-│   ├── index.js      # Точка входа
-│   ├── script.js     # Логика виджета
-│   └── style.css     # Стили
-├── server.js         # Express сервер с MCP
-├── webpack.config.js # Конфигурация Webpack
-└── package.json      # Зависимости и скрипты
+├── dist/             # Built files (generated during build)
+├── src/              # Source files
+│   ├── index.js      # Entry point
+│   ├── script.js     # Widget logic
+│   └── style.css     # Styles
+├── server.js         # Express server with MCP
+├── webpack.config.js # Webpack configuration
+└── package.json      # Dependencies and scripts
 ```
 
-## Установка и запуск
+## Installation and Running
 
-1. Установите зависимости:
+1. Install dependencies:
 
 ```bash
 npm install
 ```
 
-2. Соберите билд:
+2. Build the project:
 
 ```bash
 npm run build
 ```
 
-3. После сборки запустите сервер:
+3. Start the server:
 
 ```bash
 npm run serve
 ```
 
-Сервер будет доступен по адресу: `http://localhost:3000`
+Server will be available at: `http://localhost:3000`
 
 ## API Endpoints
 
-- `GET /mcp` - SSE endpoint для подключения MCP клиентов
-- `POST /mcp/messages?sessionId=...` - Endpoint для отправки сообщений MCP
+- `GET /mcp` - SSE endpoint for connecting MCP clients
+- `POST /mcp/messages?sessionId=...` - Endpoint for sending MCP messages
 - `GET /health` - Health check endpoint
-- `GET /.well-known/*` - OpenID/OAuth конфигурация
+- `GET /.well-known/*` - OpenID/OAuth configuration
 
-### Инструменты (Tools)
+### Tools
 
-- `show_hello_world` - Показать интерактивный Hello World интерфейс
+- `show_hello_world` - Show interactive Hello World interface
 
-## Технологии
+## Technologies
 
-- **Node.js** - Runtime окружение
-- **Express** - Веб-сервер
-- **@modelcontextprotocol/sdk** - MCP SDK для Node.js
-- **Webpack** - Сборщик модулей
-- **HTML/CSS/JavaScript** - Фронтенд
+- **Node.js** - Runtime environment
+- **Express** - Web server
+- **@modelcontextprotocol/sdk** - MCP SDK for Node.js
+- **Webpack** - Module bundler
+- **HTML/CSS/JavaScript** - Frontend
 
-## Лицензия
+## License
 
 MIT
 
-## Автор
+## Author
 
-Проект создан как пример интеграции MCP сервера с OpenAI/ChatGPT.
+Project created as an example of MCP server integration with OpenAI/ChatGPT.
 
