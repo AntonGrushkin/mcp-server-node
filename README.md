@@ -1,5 +1,7 @@
 # Hello World MCP Server
 
+![Hello World Widget](docs/images/image.png)
+
 ## Description
 
 This project is an MCP (Model Context Protocol) server that provides an interactive Hello World widget. The application can be run as a standalone server or integrated with ChatGPT through the MCP protocol.
