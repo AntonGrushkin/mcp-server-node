@@ -12,6 +12,8 @@ import {
   CallToolRequestSchema,
 } from "@modelcontextprotocol/sdk/types.js";
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const PORT = process.env.PORT || 3000;
 const SSE_PATH = "/mcp";
 const POST_PATH = "/mcp/messages";
@@ -44,35 +46,13 @@ const tool = {
 };
 
 function getHTMLContent() {
-  const __filename = fileURLToPath(import.meta.url);
-  const __dirname = path.dirname(__filename);
-  const distPath = path.join(__dirname, "dist");
-
-  let JS_CONTENT = "";
-  let CSS_CONTENT = "";
+  const htmlPath = path.join(__dirname, "dist", "index.html");
 
   try {
-    const files = fs.readdirSync(distPath);
-    const jsFile = files.find((f) => f.startsWith("bundle.") && f.endsWith(".js"));
-    const cssFile = files.find((f) => f.startsWith("styles.") && f.endsWith(".css"));
-
-    if (jsFile) JS_CONTENT = fs.readFileSync(path.join(distPath, jsFile), "utf8");
-    if (cssFile) CSS_CONTENT = fs.readFileSync(path.join(distPath, cssFile), "utf8");
+    return fs.readFileSync(htmlPath, "utf8");
   } catch {
-    console.warn("⚠️ dist folder not found — run `npm run build` to generate assets.");
+    console.warn("⚠️ dist/index.html not found — run `npm run build` to generate dist");
   }
-
-  return `
-    <div id="hello-world-root" class="container">
-      <div class="card">
-        <h1 id="greeting">Hello World!</h1>
-        <p class="subtitle">Interactive MCP widget on Express</p>
-        <button id="changeTextBtn" class="btn">Change language</button>
-      </div>
-    </div>
-    ${CSS_CONTENT ? `<style>${CSS_CONTENT}</style>` : ""}
-    ${JS_CONTENT ? `<script type="module">${JS_CONTENT}</script>` : ""}
-  `.trim();
 }
 
 function createHelloServer() {
@@ -107,6 +87,8 @@ function createHelloServer() {
 }
 
 app.use(express.json());
+
+app.use(express.static(path.join(__dirname, "dist")));
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");

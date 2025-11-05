@@ -19,7 +19,6 @@ function changeGreeting() {
         greeting.textContent = greetings[currentIndex];
         greeting.style.opacity = '1';
         
-        // Сохраняем состояние, если запущено в ChatGPT
         if (isInChatGPT) {
             window.openai.setWidgetState({ currentIndex });
         }
@@ -31,7 +30,7 @@ greeting.style.transition = 'opacity 0.2s ease-in-out';
 changeTextBtn.addEventListener('click', changeGreeting);
 
 if (isInChatGPT) {
-    console.log('Hello World App запущено в ChatGPT!');
+    console.log('Hello World App loaded in ChatGPT!');
     
     if (window.openai.toolOutput) {
         console.log('Received data from the server:', window.openai.toolOutput);
@@ -45,7 +44,7 @@ if (isInChatGPT) {
     const sendMessageBtn = document.createElement('button');
     sendMessageBtn.textContent = 'Send message to chat';
     sendMessageBtn.className = 'btn';
-    sendMessageBtn.style.marginTop = '10px';
+    sendMessageBtn.style.marginLeft = '10px';
     sendMessageBtn.addEventListener('click', async () => {
         await window.openai.sendFollowupMessage({
             prompt: `Current greeting: ${greetings[currentIndex]}`

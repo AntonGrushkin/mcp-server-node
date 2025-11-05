@@ -1,52 +1,48 @@
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { config } from 'dotenv';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+
+config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-export default (env, argv) => {
-  const isProduction = argv.mode === 'production';
+const baseUrl = process.env.BASE_URL || '';
 
-  return {
-    entry: './src/index.js',
-    output: {
-      filename: 'bundle.[contenthash].js',
-      path: path.resolve(__dirname, 'dist'),
-      clean: true,
-    },
-    module: {
-      rules: [
-        {
-          test: /\.css$/i,
-          use: [
-            isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
-            'css-loader'
-          ],
-        },
-        {
-          test: /\.html$/i,
-          loader: 'html-loader',
-        },
-      ],
-    },
-    plugins: [
-      ...(isProduction ? [
-        new MiniCssExtractPlugin({
-          filename: 'styles.[contenthash].css',
-        })
-      ] : []),
-    ],
-    devServer: {
-      static: {
-        directory: path.join(__dirname, 'dist'),
+export default {
+  entry: './src/index.js',
+  output: {
+    filename: 'bundle.[contenthash].js',
+    path: path.resolve(__dirname, 'dist'),
+    clean: true,
+    publicPath: baseUrl,
+  },
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader'
+        ],
       },
-      compress: true,
-      port: 3000,
-      hot: true,
-      open: true,
-    },
-    devtool: isProduction ? 'source-map' : 'inline-source-map',
-  };
+      {
+        test: /\.html$/i,
+        loader: 'html-loader',
+      },
+    ],
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './index.html',
+      filename: 'index.html',
+      inject: 'body',
+    }),
+    new MiniCssExtractPlugin({
+      filename: 'styles.[contenthash].css',
+    }),
+  ],
 };
 

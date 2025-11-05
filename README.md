@@ -35,13 +35,26 @@ mcp-server-node/
 npm install
 ```
 
-2. Build the project:
+2. Create a `.env` file in the project root and set the `BASE_URL` environment variable:
+
+```bash
+BASE_URL=https://your-domain.com
+```
+
+**⚠️ Important:** The `BASE_URL` environment variable is **required** for proper static asset building. This URL is used by Webpack to generate correct paths for JavaScript and CSS files in the built HTML. Without it, the widget in ChatGPT will not be able to load its scripts and styles correctly.
+
+For example, if you're using ngrok to expose your local server:
+```bash
+BASE_URL=https://your-ngrok-url.ngrok-free.app
+```
+
+3. Build the project:
 
 ```bash
 npm run build
 ```
 
-3. Start the server:
+4. Start the server:
 
 ```bash
 npm run serve
